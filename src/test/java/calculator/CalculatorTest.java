@@ -3,6 +3,8 @@ package calculator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CalculatorTest {
@@ -93,5 +95,30 @@ class CalculatorTest {
         boolean result = calc.isPositive.test(x);
         //then:
         assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Тест на hamcrest на проверку положительного числа")
+    public void hamcrestTestIsPositive() {
+        //given:
+        int x = 1;
+        //when:
+        Calculator calc = Calculator.instance.get();
+        boolean result = calc.isPositive.test(x);
+        //then:
+        assertThat(result, equalTo(true));
+    }
+
+    @Test
+    @DisplayName("Тест на hamcrest на проверку сложения")
+    public void hamcrestTestPlus() {
+        //given:
+        int x = 1;
+        int y = 9;
+        //when:
+        Calculator calc = Calculator.instance.get();
+        int result = calc.plus.apply(x,y);
+        //then:
+        assertThat(result, is(10));
     }
 }
